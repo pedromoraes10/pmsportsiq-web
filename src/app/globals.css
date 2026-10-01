@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a141f;
+  --foreground: #f3f0e9;
+
+  /* Editorial Intelligence — locked visual language (see design canvas) */
+  --pm-bg: #0a141f;
+  --pm-bg-raised: #0e1a27;
+  --pm-border: rgba(243, 240, 233, 0.08);
+  --pm-border-strong: rgba(243, 240, 233, 0.14);
+  --pm-text: #f3f0e9;
+  --pm-text-muted: rgba(243, 240, 233, 0.55);
+  --pm-text-soft: rgba(243, 240, 233, 0.38);
+  --pm-gold: #b28224;
+  --pm-gold-soft: rgba(178, 130, 36, 0.12);
+  --pm-gold-border: rgba(178, 130, 36, 0.35);
+  --pm-success: #5bd68a;
+  --pm-danger: #e2584f;
+  --pm-info: #6fa3c9;
+
+  --font-barlow: var(--font-barlow);
+  --font-barlow-condensed: var(--font-barlow-condensed);
+  --font-dm-mono: var(--font-dm-mono);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-pm-bg: var(--pm-bg);
+  --color-pm-bg-raised: var(--pm-bg-raised);
+  --color-pm-border: var(--pm-border);
+  --color-pm-border-strong: var(--pm-border-strong);
+  --color-pm-text: var(--pm-text);
+  --color-pm-text-muted: var(--pm-text-muted);
+  --color-pm-text-soft: var(--pm-text-soft);
+  --color-pm-gold: var(--pm-gold);
+  --color-pm-gold-soft: var(--pm-gold-soft);
+  --color-pm-gold-border: var(--pm-gold-border);
+  --color-pm-success: var(--pm-success);
+  --color-pm-danger: var(--pm-danger);
+  --color-pm-info: var(--pm-info);
+
+  --font-sans: var(--font-barlow);
+  --font-display: var(--font-barlow-condensed);
+  --font-mono: var(--font-dm-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-barlow), sans-serif;
+}
