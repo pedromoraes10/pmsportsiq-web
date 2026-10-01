@@ -76,6 +76,7 @@ export function AppShell({
 }) {
   return (
     <div className="min-h-screen bg-pm-bg text-pm-text font-sans">
+      <div className="h-[3px] bg-pm-gold" />
       <header className="flex items-center justify-between px-10 py-4 border-b border-pm-border">
         <div className="font-display font-extrabold text-sm tracking-[3px]">
           PM <span className="text-pm-gold">SPORTS IQ</span>
@@ -120,7 +121,7 @@ export function AppShell({
             </a>
           ))}
         </nav>
-        <main className="flex-1 min-w-0 px-14 pt-12 pb-20 max-w-[1300px]">{children}</main>
+        <main className="flex-1 min-w-0 px-16 pt-14 pb-24 max-w-[1480px]">{children}</main>
       </div>
     </div>
   );

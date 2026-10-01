@@ -157,7 +157,7 @@ export function DashboardClient({ leagueIndex }: { leagueIndex: LeagueIndexEntry
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-2 gap-16 mb-14">
+          <div className="grid grid-cols-2 gap-24 mb-16">
             <section>
               <SectionHeader title="Jogadores por posição" meta="Base carregada" />
               {posCounts.map((p) => (
@@ -172,14 +172,18 @@ export function DashboardClient({ leagueIndex }: { leagueIndex: LeagueIndexEntry
             </section>
           </div>
 
-          <div className="grid grid-cols-2 gap-16">
+          <div className="grid grid-cols-2 gap-24">
             <section>
               <SectionHeader title="Distribuição de idade" meta="15–40" />
-              <MiniBars values={ageBuckets} max={maxAge} />
+              <MiniBars values={ageBuckets} labels={AGE_BUCKET_LABELS} max={maxAge} />
             </section>
             <section>
               <SectionHeader title="Vencimento de contrato" meta="Por ano" />
-              <MiniBars values={contractBuckets.map(([, c]) => c)} max={maxContract} />
+              <MiniBars
+                values={contractBuckets.map(([, c]) => c)}
+                labels={contractBuckets.map(([y]) => y)}
+                max={maxContract}
+              />
             </section>
           </div>
         </>
@@ -199,34 +203,45 @@ function KpiRow({ label, value }: { label: string; value: string | number }) {
 
 function SectionHeader({ title, meta }: { title: string; meta: string }) {
   return (
-    <div className="flex items-baseline justify-between mb-5">
-      <span className="font-display font-bold text-base tracking-[0.5px]">{title}</span>
-      <span className="font-mono text-[9px] text-pm-text-soft tracking-[1px]">{meta}</span>
+    <div className="flex items-baseline justify-between mb-6">
+      <span className="font-display font-bold text-xl tracking-[0.3px]">{title}</span>
+      <span className="font-mono text-[9px] text-pm-text-soft tracking-[1.5px] uppercase">{meta}</span>
     </div>
   );
 }
 
 function BarRow({ label, value, pct }: { label: string; value: string; pct: number }) {
   return (
-    <div className="flex items-center justify-between py-2.5 border-t border-pm-border text-[13px] first:border-t-0">
-      <span className="flex items-center gap-2.5">{label}</span>
-      <span className="w-[90px] h-1 bg-white/[0.08] shrink-0">
+    <div className="flex items-center gap-5 py-3.5 border-t border-pm-border text-[15px] first:border-t-0">
+      <span className="w-[108px] shrink-0 truncate">{label}</span>
+      <span className="flex-1 h-[5px] bg-white/[0.06] shrink-0">
         <span className="block h-full bg-pm-gold" style={{ width: `${pct}%` }} />
       </span>
-      <span className="font-mono text-[11px] text-pm-text-muted">{value}</span>
+      <span className="font-mono text-[13px] text-pm-text w-[64px] text-right shrink-0">{value}</span>
     </div>
   );
 }
 
-function MiniBars({ values, max }: { values: number[]; max: number }) {
+function MiniBars({
+  values,
+  labels,
+  max,
+}: {
+  values: number[];
+  labels: string[];
+  max: number;
+}) {
   return (
-    <div className="flex items-end gap-1.5 h-[72px] mt-1.5">
+    <div className="flex items-end gap-2.5 h-[140px] mt-2">
       {values.map((v, i) => (
-        <div
-          key={i}
-          className={v === max && v > 0 ? "flex-1 bg-pm-gold" : "flex-1 bg-pm-gold/50"}
-          style={{ height: `${Math.max(2, (v / max) * 100)}%` }}
-        />
+        <div key={i} className="flex-1 flex flex-col items-center justify-end h-full gap-2">
+          <span className="font-mono text-[11px] text-pm-text-muted">{v || ""}</span>
+          <div
+            className={v === max && v > 0 ? "w-full bg-pm-gold" : "w-full bg-[#2a3444]"}
+            style={{ height: `${Math.max(3, (v / max) * 100)}%` }}
+          />
+          <span className="font-mono text-[9px] text-pm-text-soft tracking-[0.5px]">{labels[i]}</span>
+        </div>
       ))}
     </div>
   );
